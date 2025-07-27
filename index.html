@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge Technologies Accessible Design Resource</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            font-size: 18px;
+        }
+
+        /* Skip to content link for screen readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Header and navigation */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .site-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .site-subtitle {
+            font-size: 1.1rem;
+            color: #ecf0f1;
+            margin-bottom: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav li {
+            margin-right: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a:focus {
+            color: #3498db;
+            border-bottom-color: #3498db;
+            outline: 2px solid #3498db;
+            outline-offset: 2px;
+        }
+
+        nav a.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        /* Main content */
+        main {
+            min-height: calc(100vh - 200px);
+        }
+
+        .content-section {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            line-height: 1.3;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+            line-height: 1.3;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            max-width: 75ch;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Accessibility features */
+        .highlight-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .wcag-principle {
+            background-color: #e8f5e8;
+            border: 2px solid #28a745;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .wcag-principle h3 {
+            color: #155724;
+            margin-top: 0;
+        }
+
+        .example-box {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .example-box h4 {
+            color: #856404;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Interactive elements */
+        .accordion {
+            margin: 1rem 0;
+        }
+
+        .accordion-header {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 1rem;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px 4px 0 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion-header:hover, .accordion-header:focus {
+            background-color: #2980b9;
+            outline: 2px solid #fff;
+            outline-offset: -2px;
+        }
+
+        .accordion-header:after {
+            content: '+';
+            float: right;
+            font-weight: bold;
+        }
+
+        .accordion-header.active:after {
+            content: '-';
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border: 2px solid #3498db;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        /* Video containers */
+        .video-container {
+            margin: 2rem 0;
+            background-color: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .video-container h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .video-container video, .video-container iframe {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            min-height: 315px;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .video-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 1rem;
+        }
+
+        /* Resource links */
+        .resource-links {
+            background-color: #e8f4fd;
+            border-left: 4px solid #007bff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .resource-links h3 {
+            color: #0056b3;
+            margin-top: 0;
+        }
+
+        .resource-links ul {
+            margin-bottom: 0;
+        }
+
+        .external-link-icon {
+            font-size: 0.8rem;
+            color: #007bff;
+            margin-left: 0.25rem;
+        }
+
+        /* Interactive Elements Styling */
+        .interactive-element {
+            background-color: #f0f8ff;
+            border: 3px solid #4169e1;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .interactive-element h3 {
+            color: #4169e1;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        /* Quiz Styling */
+        .quiz-container {
+            margin-top: 1rem;
+        }
+
+        .quiz-question {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid #e0e0e0;
+        }
+
+        .quiz-question h4 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-options {
+            margin: 1rem 0;
+        }
+
+        .quiz-options label {
+            display: block;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .quiz-options label:hover {
+            background-color: #f5f5f5;
+        }
+
+        .quiz-options input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .quiz-submit-btn {
+            background-color: #4169e1;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 1rem 0;
+            transition: background-color 0.3s;
+        }
+
+        .quiz-submit-btn:hover, .quiz-submit-btn:focus {
+            background-color: #2c4fd6;
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .quiz-feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .quiz-feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        .quiz-results {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .quiz-results.excellent {
+            background-color: #d4edda;
+            color: #155724;
+            border: 3px solid #28a745;
+        }
+
+        .quiz-results.good {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 3px solid #ffc107;
+        }
+
+        .quiz-results.needs-improvement {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 3px solid #dc3545;
+        }
+
+        /* Checklist Styling */
+        .checklist-container {
+            margin-top: 1rem;
+        }
+
+        .checklist-progress {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #28a745;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .checklist-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid #e0e0e0;
+        }
+
+        .checklist-section h4 {
+            color: #4169e1;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            position: relative;
+        }
+
+        .checklist-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .checklist-checkbox {
+            margin-right: 1rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checklist-completion {
+            background-color: #d4edda;
+            border: 3px solid #28a745;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .checklist-completion h4 {
+            color: #155724;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .checklist-completion p {
+            color: #155724;
+            font-size: 1.1rem;
+        }
+
+        /* Immersive Reader button */
+        .immersive-btn {
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .immersive-btn:hover, .immersive-btn:focus {
+            background-color: #106ebe;
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        /* References page styles */
+        .reference-list {
+            margin: 2rem 0;
+        }
+
+        .reference-item {
+            background-color: #f8f9fa;
+            border-left: 4px solid #28a745;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .reference-item h3 {
+            color: #155724;
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+        .citation {
+            font-style: italic;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .annotation {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .additional-references {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+
+        .additional-references p {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Focus indicators */
+        button:focus, a:focus {
+            outline: 2px solid #3498db;
+            outline-offset: 2px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav li {
+                margin-right: 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+            
+            header {
+                background-color: #000;
+                color: #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header>
+        <div class="container">
+            <div class="site-title">SkillBridge Technologies Accessible Design Resource</div>
+            <div class="site-subtitle">Creating Inclusive Learning Experiences for Everyone</div>
+            <nav role="navigation" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#home" class="nav-link active">🏠 Home</a></li>
+                    <li><a href="#guidelines" class="nav-link">📋 Guidelines & Standards</a></li>
+                    <li><a href="#udl" class="nav-link">🎯 Universal Design</a></li>
+                    <li><a href="#compliance" class="nav-link">⚖️ Compliance</a></li>
+                    <li><a href="#design" class="nav-link">🎨 Design Practices</a></li>
+                    <li><a href="#multimedia" class="nav-link">🎬 Multimedia</a></li>
+                    <li><a href="#references" class="nav-link">📚 References</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            
+            <!-- Home Page -->
+            <section id="home" class="content-section active">
+                <h1>Welcome to SkillBridge Technologies' Accessibility Resource Center</h1>
+                
+                <div class="highlight-box">
+                    <p><strong>Welcome to the Accessible Instructional Design Resource Hub!</strong> This site is designed to support trainers and instructional designers in creating inclusive, accessible digital learning environments. Through the principles of Universal Design for Learning (UDL), adherence to WCAG 2.2 standards, and legal compliance with Sections 504 and 508, you will find resources and best practices for accessible multimedia, inclusive design, and learner-centered strategies.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>Our Mission:</strong> To empower every team member at SkillBridge Technologies with the knowledge and tools needed to create accessible, inclusive online learning experiences that serve all learners, regardless of their abilities.</p>
+                </div>
+
+                <h2>The Challenge We're Addressing</h2>
+                <p>Recent audits have revealed that many of our online training materials present barriers for employees and clients with disabilities. This resource center provides comprehensive guidance to help us create truly inclusive learning experiences.</p>
+
+                <h2>What You'll Find Here</h2>
+                <p>This resource covers five essential areas of accessible design:</p>
+                
+                <ul>
+                    <li><strong>Accessibility Guidelines and Standards:</strong> Understanding WCAG 2.1 and international accessibility standards</li>
+                    <li><strong>Universal Design for Learning (UDL):</strong> Creating flexible learning experiences that work for everyone</li>
+                    <li><strong>Legal Compliance:</strong> Meeting Section 504 and 508 requirements</li>
+                    <li><strong>Accessible Design Practices:</strong> Typography, color, and information architecture best practices</li>
+                    <li><strong>Accessible Multimedia:</strong> Creating inclusive video, audio, and visual content</li>
+                </ul>
+
+                <p>Use the navigation menu to explore each section in any order you prefer. Empower yourself with knowledge, tools, and techniques to make learning accessible for all.</p>
+
+                <div class="highlight-box">
+                    <h3>Microsoft Immersive Reader Integration</h3>
+                    <p>This website supports Microsoft Immersive Reader for enhanced accessibility. Users can:</p>
+                    <ul>
+                        <li>Have text read aloud with natural-sounding voices</li>
+                        <li>Adjust reading speed and voice preferences</li>
+                        <li>Highlight parts of speech (nouns, verbs, adjectives)</li>
+                        <li>Break words into syllables for better comprehension</li>
+                        <li>Translate content into different languages</li>
+                    </ul>
+                    <button id="immersive-reader-btn" class="immersive-btn" onclick="launchImmersiveReader()">
+                        🔊 Launch Immersive Reader
+                    </button>
+                </div>
+
+                <div class="interactive-element">
+                    <h3>🧠 Interactive Knowledge Check Quiz</h3>
+                    <p>Test your understanding of accessibility fundamentals with this quick quiz:</p>
+                    
+                    <div class="quiz-container">
+                        <div class="quiz-question" id="question1">
+                            <h4>Question 1: What does the "P" in POUR principles stand for?</h4>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="q1" value="a"> a) Portable</label>
+                                <label><input type="radio" name="q1" value="b"> b) Perceivable</label>
+                                <label><input type="radio" name="q1" value="c"> c) Practical</label>
+                                <label><input type="radio" name="q1" value="d"> d) Progressive</label>
+                            </div>
+                            <div class="quiz-feedback" id="feedback1"></div>
+                        </div>
+
+                        <div class="quiz-question" id="question2">
+                            <h4>Question 2: What is the minimum contrast ratio for normal text under WCAG 2.1 AA?</h4>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="q2" value="a"> a) 3:1</label>
+                                <label><input type="radio" name="q2" value="b"> b) 4.5:1</label>
+                                <label><input type="radio" name="q2" value="c"> c) 7:1</label>
+                                <label><input type="radio" name="q2" value="d"> d) 2:1</label>
+                            </div>
+                            <div class="quiz-feedback" id="feedback2"></div>
+                        </div>
+
+                        <div class="quiz-question" id="question3">
+                            <h4>Question 3: Which UDL principle focuses on the "Why" of learning?</h4>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="q3" value="a"> a) Multiple Means of Representation</label>
+                                <label><input type="radio" name="q3" value="b"> b) Multiple Means of Action and Expression</label>
+                                <label><input type="radio" name="q3" value="c"> c) Multiple Means of Engagement</label>
+                                <label><input type="radio" name="q3" value="d"> d) Multiple Means of Assessment</label>
+                            </div>
+                            <div class="quiz-feedback" id="feedback3"></div>
+                        </div>
+
+                        <button class="quiz-submit-btn" onclick="checkAllAnswers()">Submit Quiz</button>
+                        <div class="quiz-results" id="quizResults"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Guidelines & Standards Page -->
+            <section id="guidelines" class="content-section">
+                <h1>Accessibility Guidelines and Standards</h1>
+                
+                <h2>Why Web Accessibility Standards Matter</h2>
+                <p>Web accessibility standards ensure that digital content is usable by people with disabilities, including those who use assistive technologies like screen readers, voice recognition software, or alternative navigation devices. These standards benefit everyone by creating more usable and inclusive experiences (Jaeger, 2012). Digital inequality affects millions of users worldwide, making accessibility standards not just a legal requirement but a moral imperative for creating an inclusive digital society.</p>
+
+                <h2>The POUR Principles</h2>
+                <p>WCAG 2.1 is built on four foundational principles, known by the acronym POUR (World Wide Web Consortium, 2018). These principles provide the framework for all accessibility guidelines:</p>
+
+                <div class="wcag-principle">
+                    <h3>Perceivable</h3>
+                    <p>Information and user interface components must be presentable to users in ways they can perceive. This means providing text alternatives for images, captions for videos, and ensuring sufficient color contrast. The W3C emphasizes that perceivable content forms the foundation of accessible design (Henry, Abou-Zahra, & Brewer, 2014).</p>
+                </div>
+
+                <div class="wcag-principle">
+                    <h3>Operable</h3>
+                    <p>User interface components and navigation must be operable. This includes making all functionality available via keyboard, providing users enough time to read content, and avoiding content that causes seizures. Federal agencies must ensure all interactive elements meet these operability standards (U.S. Access Board, 2023).</p>
+                </div>
+
+                <div class="wcag-principle">
+                    <h3>Understandable</h3>
+                    <p>Information and the operation of user interface must be understandable. This means text should be readable and understandable, and web pages should appear and operate in predictable ways. The Department of Justice emphasizes that understandable content is essential for equal access under both ADA and Section 504 (U.S. Department of Justice, 2023).</p>
+                </div>
+
+                <div class="wcag-principle">
+                    <h3>Robust</h3>
+                    <p>Content must be robust enough to be interpreted reliably by a wide variety of user agents, including assistive technologies. This means using valid, semantic HTML and ensuring compatibility with current and future assistive technologies (World Wide Web Consortium, 2018).</p>
+                </div>
+
+                <h2>WCAG 2.1 Level AA Requirements</h2>
+                <p>The WCAG 2.1 guidelines establish three levels of conformance: A, AA, and AAA. Level AA is the standard required by Section 508 and recommended for most organizations (U.S. Access Board, 2023). This level strikes a balance between accessibility and technical feasibility.</p>
+
+                <div class="accordion">
+                    <button class="accordion-header" aria-expanded="false">
+                        Perceivable Guidelines (Level AA)
+                    </button>
+                    <div class="accordion-content">
+                        <h4>1.3.4 Orientation</h4>
+                        <p>Content should not restrict its view and operation to a single display orientation unless essential.</p>
+                        
+                        <h4>1.3.5 Identify Input Purpose</h4>
+                        <p>Form inputs should programmatically identify their purpose when they collect personal information.</p>
+                        
+                        <h4>1.4.3 Contrast (Minimum)</h4>
+                        <p>Text must have a contrast ratio of at least 4.5:1 (3:1 for large text). This requirement ensures readability for users with low vision or color perception differences.</p>
+                        
+                        <h4>1.4.10 Reflow</h4>
+                        <p>Content should reflow without requiring horizontal scrolling at 320px width.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <button class="accordion-header" aria-expanded="false">
+                        Operable Guidelines (Level AA)
+                    </button>
+                    <div class="accordion-content">
+                        <h4>2.4.6 Headings and Labels</h4>
+                        <p>Headings and labels describe topic or purpose.</p>
+                        
+                        <h4>2.4.7 Focus Visible</h4>
+                        <p>Keyboard focus indicators must be visible.</p>
+                        
+                        <h4>2.5.1 Pointer Gestures</h4>
+                        <p>All functionality that uses multipoint or path-based gestures must have single-pointer alternatives.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>Implementation Example</h4>
+                    <p>When creating a training video, ensure it has synchronized captions (Perceivable), can be paused and controlled via keyboard (Operable), uses clear language (Understandable), and works with screen readers (Robust). This comprehensive approach ensures compliance with both WCAG 2.1 and Section 508 requirements (U.S. Access Board, 2023).</p>
+                </div>
+
+                <h2>Global Impact and Strategic Importance</h2>
+                <p>The development of accessibility standards represents a strategic global collaboration to ensure universal web access (Henry, Abou-Zahra, & Brewer, 2014). These standards don't just address technical requirements—they reflect a fundamental commitment to digital inclusion and equal participation in the digital economy.</p>
+
+                <div class="resource-links">
+                    <h3>External Training Links</h3>
+                    <ul>
+                        <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/" target="_blank" rel="noopener">W3C WCAG 2.1 Understanding Documents <span class="external-link-icon">↗</span></a></li>
+                        <li><a href="https://webaim.org/resources/contrastchecker/" target="_blank" rel="noopener">WebAIM Color Contrast Checker Tool <span class="external-link-icon">↗</span></a></li>
+                        <li><a href="https://www.ada.gov/resources/web-guidance/" target="_blank" rel="noopener">ADA Web Accessibility Guidance <span class="external-link-icon">↗</span></a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Universal Design for Learning Page -->
+            <section id="udl" class="content-section">
+                <h1>Universal Design for Learning (UDL)</h1>
+                
+                <p>Universal Design for Learning is a framework that guides the development of flexible learning environments and spaces that can accommodate individual learning differences. UDL is based on three core principles:</p>
+
+                <h2>1. Multiple Means of Representation (The "What" of Learning)</h2>
+                <p>Provide information and content in multiple ways to give learners various pathways to acquire knowledge.</p>
+
+                <h2>2. Multiple Means of Action and Expression (The "How" of Learning)</h2>
+                <p>Provide learners with alternatives for demonstrating what they know and can do.</p>
+
+                <h2>3. Multiple Means of Engagement (The "Why" of Learning)</h2>
+                <p>Tap into learners' interests, offer appropriate challenges, and increase motivation.</p>
+
+                <div class="video-container">
+                    <h3>UDL in Practice: Multi-Modal Learning Example</h3>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/Sh-aBaZ22pc" title="UDL in Practice: Multimodal Learning in the Workplace" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-label="UDL Multi-Modal Learning Demonstration"></iframe>
+                    <div class="video-info">
+                        <p><strong>Duration:</strong> Variable | <strong>Created by:</strong> SkillBridge Technologies | <strong>Platform:</strong> YouTube</p>
+                        <p><strong>Note:</strong> YouTube provides automatic captions. For full transcript, visit the video on YouTube.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compliance Page -->
+            <section id="compliance" class="content-section">
+                <h1>Accessibility Compliance (Section 504 & 508)</h1>
+                
+                <h2>Section 504 of the Rehabilitation Act</h2>
+                <p>Section 504 prohibits discrimination based on disability in programs and activities that receive federal financial assistance. This includes educational institutions and many employers.</p>
+
+                <h2>Section 508 of the Rehabilitation Act</h2>
+                <p>Section 508 requires federal agencies to make their Electronic and Information Technology (EIT) accessible to people with disabilities.</p>
+
+                <div class="video-container">
+                    <h3>Section 504 & 508 Compliance Overview</h3>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/gQpVm6tHZDs" title="Section 504 & 508 Compliance Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-label="Section 504 and 508 Compliance Training Video"></iframe>
+                    <div class="video-info">
+                        <p><strong>Duration:</strong> Variable | <strong>Created by:</strong> SkillBridge Technologies | <strong>Platform:</strong> YouTube</p>
+                        <p><strong>Note:</strong> YouTube provides automatic captions. For full transcript, visit the video on YouTube.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Design Practices Page -->
+            <section id="design" class="content-section">
+                <h1>Accessible Design Practices</h1>
+                
+                <h2>Typography</h2>
+                <p>Typography choices significantly impact readability and accessibility for all users, especially those with visual impairments or reading difficulties.</p>
+
+                <h2>Color and Contrast</h2>
+                <p>Proper color and contrast ensure content is readable by users with various visual abilities, including color blindness and low vision.</p>
+
+                <h2>Information Architecture</h2>
+                <p>Well-structured content helps all users navigate and understand information more easily.</p>
+
+                <div class="video-container">
+                    <h3>Typography and Color Best Practices</h3>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/6XSegoYpXHo" title="Typography & Accessibility Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-label="Typography and Accessibility Training Video"></iframe>
+                    <div class="video-info">
+                        <p><strong>Duration:</strong> Variable | <strong>Created by:</strong> SkillBridge Technologies | <strong>Platform:</strong> YouTube</p>
+                        <p><strong>Note:</strong> YouTube provides automatic captions. For full transcript, visit the video on YouTube.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Multimedia Page -->
+            <section id="multimedia" class="content-section">
+                <h1>Creating Accessible Multimedia</h1>
+                
+                <h2>Accessible Video Content</h2>
+                <p>Videos are powerful learning tools, but they must be accessible to users who are deaf, hard of hearing, blind, or have low vision.</p>
+
+                <h2>Accessible Audio Content</h2>
+                <p>Audio-only content, such as podcasts or recorded presentations, must be made accessible through transcripts.</p>
+
+                <h2>Accessible Images and Graphics</h2>
+                <p>Visual content must be made accessible through alternative text and proper markup.</p>
+
+                <div class="video-container">
+                    <h3>Creating Accessible Multimedia Content</h3>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/R-obGLyq87Y" title="Creating Accessible Multimedia" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-label="Creating Accessible Multimedia Training Video"></iframe>
+                    <div class="video-info">
+                        <p><strong>Duration:</strong> Variable | <strong>Created by:</strong> SkillBridge Technologies | <strong>Platform:</strong> YouTube</p>
+                        <p><strong>Note:</strong> YouTube provides automatic captions. For full transcript, visit the video on YouTube.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-element">
+                    <h3>✅ Interactive Accessibility Checklist</h3>
+                    <p>Use this checklist to evaluate your content for accessibility compliance. Check off items as you complete them:</p>
+                    
+                    <div class="checklist-container">
+                        <div class="checklist-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressBar"></div>
+                            </div>
+                            <span class="progress-text" id="progressText">0% Complete (0/12 items)</span>
+                        </div>
+
+                        <div class="checklist-section">
+                            <h4>Content Accessibility</h4>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                All images have descriptive alt text
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Headings are used in logical order (H1, H2, H3)
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Color contrast meets WCAG 2.1 AA standards (4.5:1)
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Text is readable and uses plain language
+                            </label>
+                        </div>
+
+                        <div class="checklist-section">
+                            <h4>Interactive Elements</h4>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                All interactive elements are keyboard accessible
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Focus indicators are visible and clear
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Links have descriptive text (not "click here")
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Forms have proper labels and error messages
+                            </label>
+                        </div>
+
+                        <div class="checklist-section">
+                            <h4>Multimedia Accessibility</h4>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Videos include synchronized captions
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Audio descriptions provided when needed
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Media players are accessible via keyboard
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                                <span class="checkmark"></span>
+                                Transcripts available for audio content
+                            </label>
+                        </div>
+
+                        <div class="checklist-completion" id="completionMessage" style="display: none;">
+                            <h4>🎉 Congratulations!</h4>
+                            <p>You've completed all accessibility checks! Your content should now meet WCAG 2.1 AA standards.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- References Page -->
+            <section id="references" class="content-section">
+                <h1>References</h1>
+                
+                <div class="highlight-box">
+                    <p>All sources cited in this resource follow APA 7th edition formatting guidelines and represent current, authoritative information on accessibility standards and practices.</p>
+                </div>
+
+                <div class="reference-list">
+                    <h2>Annotated Bibliography</h2>
+                    
+                    <div class="reference-item">
+                        <h3>Reference 1</h3>
+                        <p class="citation"><em>CAST. (2018). Universal Design for Learning guidelines version 2.2. http://udlguidelines.cast.org</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> This source outlines the UDL framework, providing checkpoints and principles for supporting learner variability. It emphasizes the importance of multiple means of engagement, representation, and action and expression.</p>
+                            <p><strong>Relevance:</strong> Used to inform the UDL section of the website, offering practical examples and strategies for instructional design.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 2</h3>
+                        <p class="citation"><em>World Wide Web Consortium (W3C). (2018). Web Content Accessibility Guidelines (WCAG) 2.1. https://www.w3.org/TR/WCAG21/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> WCAG 2.1 provides the global standard for digital accessibility, structured around the POUR principles (Perceivable, Operable, Understandable, Robust).</p>
+                            <p><strong>Relevance:</strong> Forms the foundation for the Accessibility Guidelines and Standards page guiding multimedia and design choices.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 3</h3>
+                        <p class="citation"><em>U.S. Department of Justice. (2025, February 6). Justice Department to publish final rule to strengthen web and mobile app access for people with disabilities. https://www.justice.gov/archives/opa/pr/justice-department-publish-final-rule-strengthen-web-and-mobile-app-access-people</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> This update highlights new federal efforts to ensure mobile and web accessibility for people with disabilities.</p>
+                            <p><strong>Relevance:</strong> Supports the section on future trends and legal compliance for Section 504 and 508.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 4</h3>
+                        <p class="citation"><em>Mayer, R. E. (2001). Multimedia learning. Cambridge University Press.</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Mayer's theory emphasizes how learners process information through multimedia, advocating for strategies like coherence and signaling to reduce cognitive load.</p>
+                            <p><strong>Relevance:</strong> Informs best practices in the multimedia design section to promote accessibility and retention.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 5</h3>
+                        <p class="citation"><em>Bruner, J. S. (1961). The act of discovery. Harvard Educational Review, 31(1), 21-32.</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Bruner argues that learners actively construct knowledge through discovery and interaction.</p>
+                            <p><strong>Relevance:</strong> Supports the hypermedia framework and interactive structure of the site to encourage learner engagement.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 6</h3>
+                        <p class="citation"><em>U.S. Access Board. (2023). Information and communication technology (ICT) standards and guidelines (Section 508 refresh). https://www.access-board.gov/ict/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> This government publication outlines legal accessibility standards for federal agencies, detailing updates that align with WCAG 2.0/2.1 for electronic content.</p>
+                            <p><strong>Relevance:</strong> Essential for understanding how WCAG standards are implemented under U.S. federal law via Section 508.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 7</h3>
+                        <p class="citation"><em>U.S. Department of Justice. (2023). ADA and Section 504: Protecting access to digital content. https://www.justice.gov/crt/fcs/ada-section504-guidance</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Provides federal guidance on how the Americans with Disabilities Act and Section 504 apply to digital services, emphasizing equal access for individuals with disabilities.</p>
+                            <p><strong>Relevance:</strong> This supports the legal foundation for accessibility beyond education, including government websites and services.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 8</h3>
+                        <p class="citation"><em>Henry, S. L., Abou-Zahra, S., & Brewer, J. (2014). The role of accessibility in a universal web: W3C WAI's strategic contributions. Information Technology and Disabilities Journal, 14(1). https://www.w3.org/WAI/articles/journal/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> This peer-reviewed article from W3C members provides a scholarly exploration of how accessibility standards are developed and why they matter for inclusion.</p>
+                            <p><strong>Relevance:</strong> Gives academic context to the WCAG framework and strategic global collaboration around accessible design.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 9</h3>
+                        <p class="citation"><em>Jaeger, P. T. (2012). Disability and the Internet: Access, inclusion, and digital inequality. Lynne Rienner Publishers.</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> This scholarly book examines digital inequality through the lens of disability and the importance of legal frameworks like WCAG and ADA.</p>
+                            <p><strong>Relevance:</strong> Provides deep insight into the societal impact of accessibility standards, useful for policy and education discussions.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 10</h3>
+                        <p class="citation"><em>CAST. (2023). UDL and inclusive practices. https://www.cast.org/our-work/about-udl</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Provides practical guidance and implementation resources for UDL in diverse learning settings, focusing on equity and accessibility.</p>
+                            <p><strong>Relevance:</strong> Supports UDL in practice and is ideal for educators designing inclusive learning experiences.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 11</h3>
+                        <p class="citation"><em>Meyer, A., Rose, D. H., & Gordon, D. (2014). Universal Design for Learning: Theory and practice. CAST Professional Publishing.</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> An authoritative resource from UDL's co-creators that provides both theoretical grounding and real-world application strategies.</p>
+                            <p><strong>Relevance:</strong> Explains the science and rationale behind UDL and how it can transform curriculum design.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 12</h3>
+                        <p class="citation"><em>Novak, K. (2021). UDL now! A teacher's guide to applying Universal Design for Learning in today's classrooms (3rd ed.). CAST Professional Publishing.</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Offers practical, classroom-ready strategies for implementing UDL across content areas and student ability levels.</p>
+                            <p><strong>Relevance:</strong> A useful how-to guide for educators looking to apply UDL immediately in schools or online learning spaces.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 13</h3>
+                        <p class="citation"><em>Rao, K., Smith, S. J., & Lowrey, K. A. (2017). UDL and inclusive practices in blended and online learning environments. Journal of Special Education Technology, 32(4), 224–233. https://doi.org/10.1177/0162643416681495</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Peer-reviewed study analyzing UDL's impact in online and blended learning contexts, particularly for learners with disabilities.</p>
+                            <p><strong>Relevance:</strong> Provides scholarly evidence for applying UDL in digital instructional design and accessibility planning.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 14</h3>
+                        <p class="citation"><em>U.S. Department of Education, Office for Civil Rights. (2020). Parent and Educator Resource Guide to Section 504 in Public Elementary and Secondary Schools. https://www2.ed.gov/about/offices/list/ocr/docs/504-resource-guide-201612.pdf</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> This official guide clarifies responsibilities under Section 504 and outlines accommodations and procedures for public schools.</p>
+                            <p><strong>Relevance:</strong> It serves as a practical resource for educators and institutions ensuring compliance with Section 504.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 15</h3>
+                        <p class="citation"><em>U.S. Access Board. (2018). Information and Communication Technology (ICT) Final Standards and Guidelines. https://www.access-board.gov/ict/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> These guidelines update Section 508 standards and align them with WCAG 2.0 to enhance the accessibility of electronic content.</p>
+                            <p><strong>Relevance:</strong> Essential for designing compliant instructional materials and technologies in federally funded environments.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 16</h3>
+                        <p class="citation"><em>Center for Applied Special Technology (CAST). (2018). Accessibility and UDL: Why it matters. https://www.cast.org</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> CAST provides insight into how Section 504 and 508 intersect with Universal Design for Learning to foster inclusive environments.</p>
+                            <p><strong>Relevance:</strong> Explains the instructional application of legal standards using UDL principles.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 17</h3>
+                        <p class="citation"><em>National Center on Accessible Educational Materials. (2022). Understanding Section 504 and 508. https://aem.cast.org/resources/section-504-508</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Explores the purpose, scope, and enforcement of Sections 504 and 508 in education and workplace settings.</p>
+                            <p><strong>Relevance:</strong> Provides comprehensive understanding of legal requirements and practical implementation strategies.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 18</h3>
+                        <p class="citation"><em>WebAIM. (2023). Visual design for accessibility. https://webaim.org/articles/visual/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Provides best practices for typography, color contrast, layout, and other visual design elements that enhance accessibility.</p>
+                            <p><strong>Relevance:</strong> Useful for instructional designers and content developers aiming to create visually accessible learning materials.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 19</h3>
+                        <p class="citation"><em>World Wide Web Consortium (W3C). (2018). Accessibility principles. https://www.w3.org/WAI/fundamentals/accessibility-principles/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Outlines fundamental principles of accessibility, focusing on inclusive design elements such as text clarity and operable interfaces.</p>
+                            <p><strong>Relevance:</strong> Serves as a foundational resource for creating inclusive, accessible websites and applications.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 20</h3>
+                        <p class="citation"><em>Nielsen Norman Group. (2021). Accessibility and usability: Working together to improve the user experience. https://www.nngroup.com/articles/accessibility-usability/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Explores how accessible design enhances usability for all users, not just those with disabilities.</p>
+                            <p><strong>Relevance:</strong> Highlights how accessibility supports universal usability, offering strategies for design that benefits all learners.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 21</h3>
+                        <p class="citation"><em>U.S. Department of Health and Human Services. (2022). Usability.gov: Visual design. https://www.usability.gov/what-and-why/visual-design.html</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Details guidance on using typography, spacing, and color to improve readability and reduce cognitive load.</p>
+                            <p><strong>Relevance:</strong> Helps designers apply accessible visual design principles to government and educational websites.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 22</h3>
+                        <p class="citation"><em>National Center on Accessible Educational Materials. (2021). Designing for accessibility with POUR. https://aem.cast.org/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Breaks down the POUR principles (Perceivable, Operable, Understandable, Robust) with examples for accessible content design.</p>
+                            <p><strong>Relevance:</strong> Provides an actionable framework for evaluating and improving digital content accessibility.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 23</h3>
+                        <p class="citation"><em>W3C Web Accessibility Initiative. (2019). Making audio and video media accessible. https://www.w3.org/WAI/media/av/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Provides detailed guidance on accessible audio and video, including captions, transcripts, and audio descriptions.</p>
+                            <p><strong>Relevance:</strong> Essential for instructional designers incorporating multimedia into educational and training environments.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 24</h3>
+                        <p class="citation"><em>U.S. Department of Health and Human Services. (2022). Accessibility requirements for multimedia. https://www.hhs.gov/web/section-508/multimedia/index.html</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Outlines Section 508 requirements for multimedia content on federal websites and training platforms.</p>
+                            <p><strong>Relevance:</strong> Provides legal compliance guidance for anyone designing multimedia for federally funded programs.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 25</h3>
+                        <p class="citation"><em>NCDAE (National Center on Disability and Access to Education). (2021). Captioning and transcription. https://ncdae.org/resources/captioning/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Offers technical advice and rationale for captioning and transcribing video content for learners with hearing impairments.</p>
+                            <p><strong>Relevance:</strong> Helpful for ensuring that video content used in education and training is inclusive and accessible.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 26</h3>
+                        <p class="citation"><em>CAST. (2018). Guidelines for accessible media. https://aem.cast.org/</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> Recommends accessible media design aligned with UDL principles, including multiple means of representation.</p>
+                            <p><strong>Relevance:</strong> Supports the development of learner-friendly content through flexible, accessible multimedia formats.</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-item">
+                        <h3>Reference 27</h3>
+                        <p class="citation"><em>Smith, R. (2020). Designing inclusive educational videos: Accessibility practices and tools. Journal of Online Learning and Teaching, 16(3), 45–52.</em></p>
+                        <div class="annotation">
+                            <p><strong>Summary:</strong> This peer-reviewed article explores tools and strategies for creating inclusive educational videos.</p>
+                            <p><strong>Relevance:</strong> Provides both scholarly evidence and practical approaches for multimedia accessibility in e-learning.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Additional Resources Cited</h2>
+                <div class="additional-references">
+                    <p>Web Content Accessibility Guidelines (WCAG) 2.1. (2018). W3C. <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener">https://www.w3.org/TR/WCAG21/</a></p>
+                    
+                    <p>Section 508 Standards. (2018). U.S. General Services Administration. <a href="https://www.section508.gov/manage/laws-and-policies" target="_blank" rel="noopener">https://www.section508.gov/manage/laws-and-policies</a></p>
+                    
+                    <p>Universal Design for Learning Guidelines. (2018). CAST. <a href="http://udlguidelines.cast.org" target="_blank" rel="noopener">http://udlguidelines.cast.org</a></p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SkillBridge Technologies. This resource is designed to promote accessible and inclusive learning practices.</p>
+            <p>For questions or suggestions about accessibility, contact the Learning & Development team.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        // Handle navigation clicks
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links and sections
+                navLinks.forEach(l => l.classList.remove('active'));
+                contentSections.forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Show corresponding section
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    
+                    // Focus on the main heading of the section for screen readers
+                    const heading = targetSection.querySelector('h1');
+                    if (heading) {
+                        heading.focus();
+                        heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // Accordion functionality
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+        
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                
+                // Toggle this accordion
+                if (isExpanded) {
+                    this.setAttribute('aria-expanded', 'false');
+                    this.classList.remove('active');
+                    content.classList.remove('active');
+                } else {
+                    this.setAttribute('aria-expanded', 'true');
+                    this.classList.add('active');
+                    content.classList.add('active');
+                }
+            });
+        });
+
+        // Keyboard navigation for accordions
+        accordionHeaders.forEach(header => {
+            header.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+
+        // Microsoft Immersive Reader Integration
+        function launchImmersiveReader() {
+            alert('To use Immersive Reader:\n\n1. If using Microsoft Edge, click the "Read aloud" button in the address bar\n2. In other browsers, use browser extensions like "Read Aloud" or "Natural Reader"\n3. For full Immersive Reader features, visit this page in Microsoft Edge or through Office 365 applications');
+        }
+
+        // Quiz Functionality
+        function checkAllAnswers() {
+            const answers = {
+                q1: 'b', // Perceivable
+                q2: 'b', // 4.5:1
+                q3: 'c'  // Multiple Means of Engagement
+            };
+
+            let score = 0;
+            let totalQuestions = 3;
+
+            // Check each question
+            Object.keys(answers).forEach((questionKey, index) => {
+                const selectedAnswer = document.querySelector(`input[name="${questionKey}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback${index + 1}`);
+                
+                if (selectedAnswer) {
+                    if (selectedAnswer.value === answers[questionKey]) {
+                        score++;
+                        feedbackDiv.textContent = '✓ Correct!';
+                        feedbackDiv.className = 'quiz-feedback correct';
+                    } else {
+                        feedbackDiv.textContent = '✗ Incorrect. ' + getCorrectAnswerText(questionKey);
+                        feedbackDiv.className = 'quiz-feedback incorrect';
+                    }
+                } else {
+                    feedbackDiv.textContent = 'Please select an answer.';
+                    feedbackDiv.className = 'quiz-feedback incorrect';
+                }
+            });
+
+            // Display results
+            const resultsDiv = document.getElementById('quizResults');
+            const percentage = Math.round((score / totalQuestions) * 100);
+            
+            let resultClass = 'needs-improvement';
+            let resultMessage = 'Keep studying! Review the content and try again.';
+            
+            if (percentage >= 90) {
+                resultClass = 'excellent';
+                resultMessage = 'Excellent work! You have a strong understanding of accessibility principles.';
+            } else if (percentage >= 70) {
+                resultClass = 'good';
+                resultMessage = 'Good job! You understand most accessibility concepts.';
+            }
+
+            resultsDiv.innerHTML = `
+                <div class="quiz-results ${resultClass}">
+                    🎯 Quiz Results: ${score}/${totalQuestions} (${percentage}%)<br>
+                    ${resultMessage}
+                </div>
+            `;
+        }
+
+        function getCorrectAnswerText(questionKey) {
+            const explanations = {
+                q1: 'The correct answer is "Perceivable" - users must be able to perceive the information being presented.',
+                q2: 'The correct answer is "4.5:1" - this is the minimum contrast ratio for normal text under WCAG 2.1 AA.',
+                q3: 'The correct answer is "Multiple Means of Engagement" - this principle focuses on the "why" of learning.'
+            };
+            return explanations[questionKey];
+        }
+
+        // Checklist Functionality
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.checklist-checkbox');
+            const checkedBoxes = document.querySelectorAll('.checklist-checkbox:checked');
+            const totalItems = checkboxes.length;
+            const completedItems = checkedBoxes.length;
+            const percentage = Math.round((completedItems / totalItems) * 100);
+
+            // Update progress bar
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            progressBar.style.width = percentage + '%';
+            progressText.textContent = `${percentage}% Complete (${completedItems}/${totalItems} items)`;
+
+            // Show completion message if all items checked
+            const completionMessage = document.getElementById('completionMessage');
+            if (completedItems === totalItems) {
+                completionMessage.style.display = 'block';
+            } else {
+                completionMessage.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
